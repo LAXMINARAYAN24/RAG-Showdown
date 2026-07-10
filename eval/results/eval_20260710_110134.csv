@@ -1,0 +1,23 @@
+question_id,category,strategy,question,answer,score,judge_reason,latency_seconds
+q001,simple_factual,Naive RAG,What does RAG stand for?,RAG stands for Retrieval Augmented Generation.,5,The AI's answer is fully correct and contains all the key concepts required by the question.,3.4075827598571777
+q002,simple_factual,Naive RAG,What are the four key steps for building a RAG architecture according to the Confluent Data Streaming Platform?,"According to the Confluent Data Streaming Platform, the four key steps for building a RAG architecture are:
+1. Data Augmentation
+2. Inference
+3. Workflows
+4. Post-Processing",5,The AI accurately identified all four key steps for building a RAG architecture as listed by Confluent Data Streaming Platform.,3.606887102127075
+q003,simple_factual,Naive RAG,Name three vector stores that Confluent has native integrations with.,I don't know.,1,The AI incorrectly stated it did not know the answer when the information was readily available.,4.153782606124878
+q004,compound,Naive RAG,What is the difference between how RAG retrieves information and how a traditional database query works?,I don't know.,1,"The AI failed to provide any relevant information and did not attempt to answer the question, which was answerable.",4.500325679779053
+q005,compound,Naive RAG,Why might fine-tuning an LLM be a worse choice than RAG for keeping domain knowledge up to date?,"Fine-tuning an LLM can be a worse choice than RAG for keeping domain knowledge up to date because it is challenging to get right and ""can inadvertently alter the LLM to forget previously learned information or become less proficient."" Additionally, fine-tuning requires ""significant expertise and investment."" In contrast, RAG ""provides up-to-date information"" and is ""easy to update (just update KB).""",4,"The answer correctly identifies key drawbacks of fine-tuning compared to RAG but omits the concept of ""retrain"" and uses quotes that might imply it's not entirely the AI's own explanation.",7.9221155643463135
+q006,ambiguous_nuanced,Naive RAG,Is RAG always better than fine-tuning an LLM?,"I don't know. The context states that RAG is ""Cost effective (no need for fine-tuning)"" as a benefit, implying it can be an alternative to fine-tuning, but it does not state that RAG is *always* better than fine-tuning an LLM. It also lists other benefits and challenges of RAG.",1,"The AI incorrectly states it does not know, failing to recognize that the question is answerable by comparing RAG and fine-tuning, and misses the core concept that the best approach depends on the use case.",5.10704231262207
+q007,multi_hop,Naive RAG,"In the airline chatbot example, what happens after the passenger's query about frequent flyer miles is broken down into steps by the reasoning agent?","After the passenger's query is broken down into steps by the reasoning agent:
+
+1.  A microservice is called for the exchange rate between frequent flyer miles and credit card points.
+2.  The frequent flyer miles system is queried to see if the passenger has enough miles for an upgrade.
+3.  Another database is queried for their available credit card points.
+4.  Finally, the LLM is prompted with all the gathered information to show recommended flights for the passenger.",3,"The answer correctly identifies that the LLM is prompted with gathered information, but it invents a microservice for currency exchange and doesn't explicitly mention the checked bag concept as a potential part of the passenger's implicit needs.",3.646362781524658
+q008,needs_structure,Naive RAG,"According to the document, what are examples of data that should NOT be directly vectorized?","According to the document, examples of data that should not be directly vectorized include:
+*   Data without inherent meaning absent its schema (e.g., social security numbers, credit card numbers).
+*   Data that is solely identifiers (e.g., CSV of product IDs).
+*   Data when interested in aggregated analytics (e.g., percentage of web visitors who clicked on a banner), which has little semantic value and is better queried from relational databases.",5,The AI's answer correctly identifies all the key concepts from the document as examples of data that should not be directly vectorized.,49.446253299713135
+q009,trick_no_answer,Naive RAG,What did the Confluent whitepaper say about using RAG for autonomous vehicles?,I don't know.,5,"The AI correctly stated it did not know, fulfilling the requirement for this unanswerable question.",3.3129403591156006
+q010,trick_no_answer,Naive RAG,What pricing does Confluent charge for their Enterprise RAG tier?,I don't know.,5,The AI correctly identified that it did not have the requested information.,18.18665361404419

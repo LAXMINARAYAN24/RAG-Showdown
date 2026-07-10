@@ -1,0 +1,51 @@
+# questions/question_bank.yaml
+
+- id: q001
+  category: simple_factual
+  question: "What does RAG stand for?"
+  expected_answer_contains: ["Retrieval", "Augmented", "Generation"]
+
+- id: q002
+  category: simple_factual
+  question: "What are the four key steps for building a RAG architecture according to the Confluent Data Streaming Platform?"
+  expected_answer_contains: ["Data Augmentation", "Inference", "Workflows", "Post-Processing"]
+
+- id: q003
+  category: simple_factual
+  question: "Name three vector stores that Confluent has native integrations with."
+  expected_answer_contains: ["MongoDB", "Pinecone", "Elasticsearch", "Weaviate", "Zilliz"]
+
+- id: q004
+  category: compound
+  question: "What is the difference between how RAG retrieves information and how a traditional database query works?"
+  expected_answer_contains: ["vector", "embedding", "semantic", "keyword"]
+
+- id: q005
+  category: compound
+  question: "Why might fine-tuning an LLM be a worse choice than RAG for keeping domain knowledge up to date?"
+  expected_answer_contains: ["forget", "expertise", "investment", "retrain"]
+
+- id: q006
+  category: ambiguous_nuanced
+  question: "Is RAG always better than fine-tuning an LLM?"
+  expected_answer_contains: ["depends", "however", "both", "accessible"]
+
+- id: q007
+  category: multi_hop
+  question: "In the airline chatbot example, what happens after the passenger's query about frequent flyer miles is broken down into steps by the reasoning agent?"
+  expected_answer_contains: ["flight upgrade", "checked bag", "frequent flyer", "prompt the LLM"]
+
+- id: q008
+  category: needs_structure
+  question: "According to the document, what are examples of data that should NOT be directly vectorized?"
+  expected_answer_contains: ["identifiers", "product IDs", "aggregated analytics"]
+
+- id: q009
+  category: trick_no_answer
+  question: "What did the Confluent whitepaper say about using RAG for autonomous vehicles?"
+  expected_answer_contains: ["I don't know", "not mentioned", "no information", "not in the context"]
+
+- id: q010
+  category: trick_no_answer
+  question: "What pricing does Confluent charge for their Enterprise RAG tier?"
+  expected_answer_contains: ["I don't know", "not mentioned", "no information", "not in the context"]
