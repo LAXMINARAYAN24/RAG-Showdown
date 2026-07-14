@@ -4,13 +4,32 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pickle
 import json
+import argparse
 from datetime import datetime
+
 from strategies.naive_rag import NaiveRAG
+from strategies.advanced_rag import AdvancedRAG
+
+# --- Command-line argument: which strategy to use ---
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--strategy",
+    choices=["naive", "advanced"],
+    default="naive",
+    help="Which strategy to answer with: naive or advanced"
+)
+args = parser.parse_args()
 
 with open("corpus/processed/store.pkl", "rb") as f:
     store = pickle.load(f)
 
-rag = NaiveRAG(store)
+# --- Pick the strategy based on the flag ---
+all_strategies = {
+    "naive": NaiveRAG(store),
+    "advanced": AdvancedRAG(store),
+}
+rag = all_strategies[args.strategy]
+
 question = input("Ask a question: ")
 result = rag.answer_question(question)
 
