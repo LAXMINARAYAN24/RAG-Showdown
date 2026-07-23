@@ -5,10 +5,10 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from core.chunker import load_and_chunk
 from core.ocr_chunker import ocr_pdf_to_chunks
 from core.embedder import embed_texts
-from core.vector_store import SimpleVectorStore
-import pickle
+from core.vector_store import ChromaVectorStore
 
-store = SimpleVectorStore()
+store = ChromaVectorStore()
+store.reset()   # clean rebuild every ingest, like the old pickle overwrite
 
 for filename in os.listdir("corpus/raw"):
     if filename.endswith(".pdf"):
@@ -24,10 +24,7 @@ for filename in os.listdir("corpus/raw"):
             continue
 
         vectors = embed_texts(chunks)
-        store.add(chunks, vectors)
+        store.add(chunks, vectors, source=filename)
         print(f"  -> {len(chunks)} chunks added")
 
-with open("corpus/processed/store.pkl", "wb") as f:
-    pickle.dump(store, f)
-
-print(f"Done. {len(store.chunks)} chunks stored.")
+print(f"Done. {store.count()} chunks stored in Chroma at corpus/processed/chroma.")

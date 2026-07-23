@@ -12,21 +12,22 @@ from datetime import datetime
 
 from strategies.naive_rag import NaiveRAG
 from strategies.advanced_rag import AdvancedRAG
+from strategies.corrective_rag import CorrectiveRAG
 from eval.judge import judge_answer
 
 # --- Command-line argument: which strategy to run ---
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--strategy",
-    choices=["naive", "advanced", "all"],
+    choices=["naive", "advanced", "corrective", "all"],
     default="all",
     help="Which strategy to run: naive, advanced, or all"
 )
 args = parser.parse_args()
 
 # Load the vector store
-with open("corpus/processed/store.pkl", "rb") as f:
-    store = pickle.load(f)
+from core.vector_store import ChromaVectorStore
+store = ChromaVectorStore()
 
 # Load the question bank
 with open("questions/question_bank.yaml", "r", encoding="utf-8") as f:
@@ -36,6 +37,7 @@ with open("questions/question_bank.yaml", "r", encoding="utf-8") as f:
 all_strategies = {
     "naive": NaiveRAG(store),
     "advanced": AdvancedRAG(store),
+    "corrective": CorrectiveRAG(store),
 }
 
 if args.strategy == "all":

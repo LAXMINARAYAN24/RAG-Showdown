@@ -20,8 +20,8 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-with open("corpus/processed/store.pkl", "rb") as f:
-    store = pickle.load(f)
+from core.vector_store import ChromaVectorStore
+store = ChromaVectorStore()
 
 # --- Pick the strategy based on the flag ---
 all_strategies = {

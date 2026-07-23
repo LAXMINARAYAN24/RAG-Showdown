@@ -5,8 +5,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pickle
 from strategies.advanced_rag import AdvancedRAG
 
-with open("corpus/processed/store.pkl", "rb") as f:
-    store = pickle.load(f)
+from core.vector_store import ChromaVectorStore
+store = ChromaVectorStore()
 
 rag = AdvancedRAG(store)
 

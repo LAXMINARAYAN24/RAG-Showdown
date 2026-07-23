@@ -14,3 +14,11 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+
+corpus/processed/chroma/
+corpus/processed/store.pkl
+core/__pycache__/
+strategies/__pycache__/
+eval/__pycache__/
+*.pyc
