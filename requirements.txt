@@ -1,0 +1,19 @@
+# Core dependencies
+openai>=1.0
+python-dotenv
+pyyaml
+numpy
+
+# Embedding, reranking, and NLI
+sentence-transformers>=2.2.0
+torch
+
+# Vector store
+chromadb>=0.4.0
+
+# PDF processing
+pypdf>=3.0
+
+# OCR fallback (optional — only needed for scanned PDFs)
+# pytesseract
+# pdf2image
