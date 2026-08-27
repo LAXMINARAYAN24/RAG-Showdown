@@ -1,0 +1,343 @@
+question_id,category,strategy,question,answer,score,judge_reason,latency_seconds
+q001,simple_factual,Naive RAG,What does RAG stand for?,"Based on the context provided, RAG stands for **Retrieval-Augmented Generation**. This is explicitly stated in Source 4: ""Poison-RAG: Adversarial Data Poisoning Attacks on **Retrieval-Augmented Generation (RAG)** in Recommender Systems"". Source 5 also describes the RAG pipeline with its three stages: indexing, retrieval, and generation.",5,The answer correctly identifies RAG as Retrieval-Augmented Generation and includes all three key concepts with supporting evidence from the provided sources.,27.643956184387207
+q002,simple_factual,Naive RAG,What are the four key steps for building a RAG architecture according to the Confluent Data Streaming Platform?,I don't know,1,"The AI answered ""I don't know"" despite the question having a specific, knowable answer (Data Augmentation, Inference, Workflows, Post-Processing) according to the Confluent Data Streaming Platform, making the response entirely missing the required key concepts.",26.398512840270996
+q003,simple_factual,Naive RAG,Name three vector stores that Confluent has native integrations with.,"Based on the context, Confluent provides native integrations with several vector stores including MongoDB, Pinecone, Elasticsearch, SingleStore, Weaviate, Zilliz, Couchbase, Neo4j, Qdrant, and Azure Cognitive Search.
+
+Three examples are: **MongoDB, Pinecone, and Elasticsearch**.",5,"The answer correctly names three vector stores (MongoDB, Pinecone, Elasticsearch) that are explicitly listed as Confluent native integrations.",16.45078134536743
+q004,compound,Naive RAG,What is the difference between how RAG retrieves information and how a traditional database query works?,I don't know,1,"The AI failed to answer a straightforward technical question and provided none of the required key concepts (vector, embedding, semantic, keyword).",19.095425128936768
+q005,compound,Naive RAG,Why might fine-tuning an LLM be a worse choice than RAG for keeping domain knowledge up to date?,"Based on the context provided, fine-tuning is a worse choice than RAG for keeping domain knowledge up to date for several reasons:
+
+1. **Requires repeated retraining**: Fine-tuning needs ""repeated retraining to adapt to evolving design patterns"" (Source 1), making it impractical for adaptive workflows where knowledge changes frequently.
+
+2. **Resource-intensive**: Fine-tuning demands ""large annotated datasets, specialized hardware"" (Source 1) and is ""inaccessible to many businesses without significant expertise and investment"" (Source 2).
+
+3. **Risk of catastrophic forgetting**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient"" (Source 2).
+
+4. **Static nature**: Fine-tuning creates ""static"" knowledge (Source 1), whereas RAG frameworks ""enable LLMs to incorporate up-to-date design contexts without retraining"" (Source 1) by providing ""dynamic access to external domain knowledge"" at inference time (Source 1, 3).
+
+5. **Narrow task focus**: Conventional fine-tuned LLM pipelines ""often target narrow tasks and require repeated retraining"" (Source 3), while RAG approaches like VeriRAG ensure ""structural and functional consistency without costly fine-tuning"" (Source 3).",1,"The answer hallucinates citations to non-existent sources (Source 1, Source 2, Source 3) despite no context being provided, which constitutes made-up information.",49.181204080581665
+q006,ambiguous_nuanced,Naive RAG,Is RAG always better than fine-tuning an LLM?,"Based on the provided context, RAG is presented as addressing several significant limitations of fine-tuning, but the context does not state that RAG is **always** better than fine-tuning.
+
+The context highlights these advantages of RAG over fine-tuning:
+- **Accessibility**: Fine-tuning and bespoke model training are ""inaccessible to many businesses without significant expertise and investment"" (Source 1).
+- **Catastrophic forgetting**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient"" (Source 1).
+- **Resource intensity**: Fine-tuning requires ""large annotated datasets, specialized hardware, and repeated retraining to adapt to evolving design patterns"" (Source 2).
+- **Static knowledge**: Fine-tuning is ""static"" and requires retraining to incorporate new information, while RAG enables ""up-to-date design contexts without retraining"" (Source 2).
+- **Hallucination reduction**: RAG grounds ""generation in factual, structured knowledge to mitigate hallucinations"" (Source 2).
+- **Real-time data**: RAG provides ""real-time data and domain-specific proprietary context"" (Source 1).
+
+However, the context does not claim RAG is universally superior in all scenarios, nor does it discuss potential advantages of fine-tuning (e.g., for highly specialized tasks where deep parameter adaptation is needed). Therefore, from the given context, we can conclude RAG solves specific problems with fine-tuning, but not that it is always the better choice.",5,"The answer correctly states that RAG is not always better based on the provided context, lists the specific advantages of RAG mentioned in the sources, acknowledges the context does not claim universal superiority or discuss fine-tuning's potential strengths, and includes the key concepts (depends, however, both, accessible).",44.93800139427185
+q007,multi_hop,Naive RAG,"In the airline chatbot example, what happens after the passenger's query about frequent flyer miles is broken down into steps by the reasoning agent?","After the reasoning agent breaks down the passenger's query into steps, it executes each step by interacting with external tools and resources. Specifically, the agent:
+
+1. Performs a RAG query against flight schedules to determine upgrade availability and cost in frequent flyer miles
+2. Checks Conflyent Airline's baggage policy from unstructured data (document or webpage) for the ticket class
+3. Calls a microservice for the exchange rate between frequent flyer miles and credit card points, queries the frequent flyer miles system to see if the passenger has enough miles for an upgrade, and queries another database for available credit card points
+4. Finally, prompts the LLM with all the gathered information to show recommended flights for the passenger
+
+The workflow involves a chain of LLM calls with the reasoning agent making intermediate decisions on what action to take (vector search, database queries, API calls, etc.) to retrieve the necessary information before generating the final response.",5,"The answer includes all required key concepts (flight upgrade, checked bag, frequent flyer, prompt the LLM) and describes a coherent, plausible agentic workflow without obvious hallucination.",59.97851228713989
+q008,needs_structure,Naive RAG,"According to the document, what are examples of data that should NOT be directly vectorized?","According to the document, the following are examples of data that should **not** be directly vectorized:
+
+1. **Data that is solely identifiers** – e.g., a CSV of product IDs.
+2. **Structured data with unstructured values** – e.g., a CSV containing customer reviews.
+3. **Files that have both structured and unstructured data** – e.g., research papers containing data tables.
+4. **Aggregated analytics** – e.g., percentage of web visitors who clicked on a banner, which has little semantic value and is better queried from relational databases.
+5. **Data without inherent meaning absent its schema** – e.g., social security numbers, credit card numbers.
+
+*(Note: The document also lists “When files are unstructured” under “When not to directly vectorize,” though this appears contradictory to the earlier statement that the RAG pattern is straightforward for unstructured data.)*",5,"The answer includes all required key concepts (identifiers, product IDs, aggregated analytics) and appears to accurately reflect the document's content without hallucination.",42.47415351867676
+q009,trick_no_answer,Naive RAG,What did the Confluent whitepaper say about using RAG for autonomous vehicles?,"Based on the provided context, the Confluent whitepaper (Source 4) does not mention autonomous vehicles at all. The whitepaper discusses RAG in the context of an airline chatbot example called ""Conflyent"" that assists passengers with lost luggage, retrieving data from the airline's luggage and claims policy, customer service logs, and FAQs.
+
+The references to autonomous vehicles and RAG appear in other sources (Sources 1, 2, and 5), which discuss research papers about RAG security attacks on autonomous driving agents (citing Chen et al., 2024a and Caesar et al., 2020), but these are separate from the Confluent whitepaper.",5,"The AI correctly states that the Confluent whitepaper does not mention autonomous vehicles, explains what the whitepaper actually covers, and distinguishes it from other sources that do discuss autonomous vehicles and RAG.",23.228280544281006
+q010,trick_no_answer,Naive RAG,What pricing does Confluent charge for their Enterprise RAG tier?,I don't know,5,"The AI correctly stated ""I don't know,"" which is the appropriate response when the information is not available in the context.",23.44035816192627
+q011,contradiction,Naive RAG,"When was the Transformer architecture first introduced, and who proposed it?","The Transformer architecture was first introduced in 2017 by Vaswani et al. in their seminal paper ""Attention Is All You Need,"" published at NeurIPS 2017.",3,"The answer correctly identifies 2017 and cites the seminal paper but omits the required discussion of conflicting sources, the 2016 date discrepancy, and the concepts of contradiction or disagreement among references.",129.07144904136658
+q012,contradiction,Naive RAG,How many parameters did the original Transformer model have?,"The original Transformer model (base configuration) had approximately 65 million parameters. The paper also described a ""big"" variant with roughly 213 million parameters, but sources clarify this larger configuration is often incorrectly cited as the original model. The base model used 6 encoder/decoder layers with 512 dimensions, while the big model used 1024 dimensions and 16 heads.",5,"The answer correctly identifies both the base (65M) and big (213M) Transformer configurations, accurately describes their architectural differences, and explicitly addresses the source confusion about which is the ""original"" model.",73.85708999633789
+q013,contradiction,Naive RAG,What is the computational complexity of the self-attention mechanism in Transformers?,"The self-attention mechanism in Transformers has quadratic computational complexity — O(n²) — with respect to the input sequence length n. This means computation grows as the square of the sequence length since every token must attend to every other token. While later work introduced linear approximations, the original 2017 Transformer did not include such optimizations.",3,"The answer correctly states the quadratic complexity O(n²) and mentions linear approximations, but it omits several expected key concepts such as contradict, conflict, disagree, however, and sources, indicating it is only partially aligned with the required answer framework.",24.043987035751343
+q001,simple_factual,Advanced RAG (Reranked),What does RAG stand for?,RAG stands for Retrieval-Augmented Generation.,5,"The answer correctly identifies RAG as Retrieval-Augmented Generation, containing all three key concepts without any errors or hallucinations.",24.060537338256836
+q002,simple_factual,Advanced RAG (Reranked),What are the four key steps for building a RAG architecture according to the Confluent Data Streaming Platform?,"According to the Confluent Data Streaming Platform, the four key steps for building a RAG architecture are:
+
+1. **Data Augmentation** – Preparing data for a real-time knowledge base and contextualization in LLM queries by populating a vector database.
+
+2. **Inference** – Connecting relevant information with each prompt, contextualizing what users are asking for and ensuring GenAI applications are built to handle those responses.
+
+3. **Workflows** – Parsing natural language, synthesizing the necessary information, and using a reasoning agent to determine what to do next to optimize performance (e.g., querying a database, getting information from cache, calling an LLM with a different prompt).
+
+4. **Post-Processing** – Validating LLM outputs.",5,"The answer correctly identifies all four required key steps (Data Augmentation, Inference, Workflows, Post-Processing) with accurate descriptions and no hallucinated content.",31.317021369934082
+q003,simple_factual,Advanced RAG (Reranked),Name three vector stores that Confluent has native integrations with.,"Based on the context, Confluent has native integrations with leading vector stores including MongoDB, Pinecone, Elasticsearch, SingleStore, Weaviate, Zilliz, Couchbase, Neo4j, Qdrant, and Azure Cognitive Search.
+
+Three examples are: **MongoDB, Pinecone, and Elasticsearch**.",5,"The answer correctly lists three vector stores (MongoDB, Pinecone, Elasticsearch) that are among Confluent's native integrations and align with the expected key concepts.",51.774104833602905
+q004,compound,Advanced RAG (Reranked),What is the difference between how RAG retrieves information and how a traditional database query works?,"According to the context, the key difference is that RAG uses vector embeddings and semantic similarity search, while traditional database queries rely on exact keyword matches.
+
+Specifically, in a RAG system, ""the user's query is converted into a vector embedding. This embedding is then used to search the vector database for semantically similar content, instead of exact keyword matches."" The retrieval process uses Approximate Nearest Neighbor Search (ANNS) to find documents based on the distance between their embedding vectors and the query vector, returning the top-k most relevant documents based on semantic similarity.",5,"The answer fully captures the key differences by explaining RAG's use of vector embeddings, semantic similarity search, and ANNS versus traditional databases' reliance on exact keyword matches, incorporating all required concepts without hallucination.",109.59463691711426
+q005,compound,Advanced RAG (Reranked),Why might fine-tuning an LLM be a worse choice than RAG for keeping domain knowledge up to date?,"Based on the provided context, fine-tuning is a worse choice than RAG for keeping domain knowledge up to date for several reasons:
+
+1. **Requires repeated retraining**: Fine-tuning is described as ""static"" and requires ""repeated retraining to adapt to evolving design patterns,"" making it impractical for adaptive workflows where knowledge changes frequently.
+
+2. **Cannot incorporate real-time updates**: Unlike RAG, which ""enables LLMs to incorporate up-to-date design contexts without retraining"" and ""leverages the freshest external data"" at inference time, fine-tuning cannot dynamically access new information without going through the entire training process again.
+
+3. **High resource and cost barriers**: Fine-tuning is ""resource-intensive, requiring large annotated datasets, specialized hardware"" and ""significant expertise and investment,"" which ""limits rapid prototyping and iterative refinement.""
+
+4. **Risk of degrading model capabilities**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient,"" a problem known as catastrophic forgetting.
+
+5. **RAG provides dynamic access**: RAG frameworks ""combine LLMs' generalization capabilities with dynamic access to external domain knowledge"" at inference time, allowing immediate incorporation of updated information without model modification.",5,"The answer correctly addresses all required concepts (forget/catastrophic forgetting, expertise, investment, retrain/retraining) and provides a comprehensive, accurate comparison between fine-tuning and RAG for keeping domain knowledge current.",97.5024197101593
+q006,ambiguous_nuanced,Advanced RAG (Reranked),Is RAG always better than fine-tuning an LLM?,"Based on the provided context, RAG is presented as having significant advantages over fine-tuning in the specific scenarios discussed (enterprise applications, EDA, hardware design), but the context does not state that RAG is **always** better than fine-tuning in every possible case.
+
+The sources highlight several key advantages of RAG over fine-tuning:
+- **Accessibility**: Fine-tuning is ""inaccessible to many businesses without significant expertise and investment"" (Sources 1, 4)
+- **Resource intensity**: Fine-tuning requires ""large annotated datasets, specialized hardware, and repeated retraining"" (Source 2)
+- **Catastrophic forgetting**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient"" (Sources 1, 4)
+- **Adaptability**: RAG enables ""incorporate up-to-date design contexts without retraining"" while fine-tuning requires ""repeated retraining to adapt to evolving design patterns"" (Source 2)
+- **Real-time data**: RAG ""unlock access to real-time data"" whereas fine-tuning relies on static training data (Sources 1, 4)
+- **Cost reduction**: RAG reduces ""hallucinations and LLM calls and token costs"" (Sources 1, 4)
+
+However, the context focuses on specific domains (enterprise RAG implementation, electronic design automation, hardware design) and does not make a universal claim about all possible use cases. The comparison is framed around addressing ""limitations"" of fine-tuning in these particular contexts.",5,"The answer correctly states that RAG is not universally better, highlights key advantages like accessibility and adaptability, and references the provided context without hallucination.",46.01198649406433
+q007,multi_hop,Advanced RAG (Reranked),"In the airline chatbot example, what happens after the passenger's query about frequent flyer miles is broken down into steps by the reasoning agent?","After the reasoning agent breaks down the passenger's query into steps, it executes each step sequentially:
+
+1. **Flight upgrade** – Performs a RAG query against flight schedules to determine which flights have upgrade availability and the cost in frequent flyer miles
+2. **Checked bag** – Checks Conflyent Airline's baggage policy (from unstructured data) for the ticket class
+3. **Frequent flyer miles and points** – Calls a microservice for the exchange rate between frequent flyer miles and credit card points, queries the frequent flyer miles system to see if the passenger has enough miles for an upgrade, and queries another database for their available credit card points
+
+4. **Finally** – Prompts the LLM with all the gathered information to show recommended flights for the passenger",5,"The answer correctly includes all key concepts (flight upgrade, checked bag, frequent flyer, prompt the LLM) and accurately describes the sequential execution of steps after the reasoning agent breaks down the query.",29.549663066864014
+q008,needs_structure,Advanced RAG (Reranked),"According to the document, what are examples of data that should NOT be directly vectorized?","Based on the document, examples of data that should **not** be directly vectorized include:
+
+1. **Data without inherent meaning absent its schema** – such as social security numbers and credit card numbers.
+2. **Data that is solely identifiers** – e.g., a CSV of product IDs.
+3. **Structured data with unstructured values** – e.g., a CSV containing customer reviews.
+4. **Files with mixed structured and unstructured data** – e.g., research papers containing data tables.
+5. **Aggregated analytics** – e.g., the percentage of web visitors who clicked on a banner, which has little semantic value and is better queried from relational databases.
+
+(Note: The document’s bullet list appears to have a formatting issue where “When files are unstructured” is listed under “When not to directly vectorize,” but the surrounding text indicates that unstructured data is actually suitable for vectorization.)",5,"The answer includes all required key concepts (identifiers, product IDs, aggregated analytics) and provides additional relevant examples without contradicting the expected content.",68.0034806728363
+q009,trick_no_answer,Advanced RAG (Reranked),What did the Confluent whitepaper say about using RAG for autonomous vehicles?,"Based on the provided context, the Confluent whitepaper (Sources 1-4) does not mention using RAG for autonomous vehicles. The whitepaper discusses RAG applications such as a jobs portal, an airline chatbot for lost luggage (Conflyent Airlines), and a procurement/supply chain chatbot, but there is no reference to autonomous vehicles.
+
+The only mention of autonomous vehicles appears in Source 5, which describes an adversarial attack scenario where ""a sudden stop for autonomous driving agents"" is given as an example of a prescribed adversarial output. However, Source 5 appears to be an academic research paper about adversarial attacks on RAG systems (with citations like Zou et al., 2024), not the Confluent whitepaper.",5,"The AI correctly identifies that the Confluent whitepaper does not mention RAG for autonomous vehicles, accurately summarizes what the whitepaper does cover, and distinguishes it from an unrelated academic source that mentions autonomous vehicles in a different context.",63.172651290893555
+q010,trick_no_answer,Advanced RAG (Reranked),What pricing does Confluent charge for their Enterprise RAG tier?,I don't know,5,"The AI correctly stated ""I don't know,"" which is the appropriate response when the information is not available in the context.",42.943095445632935
+q011,contradiction,Advanced RAG (Reranked),"When was the Transformer architecture first introduced, and who proposed it?","The context provides two differing accounts:
+
+- **Source 1 and Source 3** state that the Transformer architecture was introduced in **2017** by **Vaswani et al.** in the paper “Attention Is All You Need,” published at NeurIPS 2017.
+- **Source 2 and Source 4** state that the Transformer model was **first proposed in 2016** by **a team at Google Research**, initially as an internal technical report before public release.
+
+Both accounts appear in the provided context, so there is no single agreed-upon answer within the given sources.",5,"The answer accurately reflects the conflicting accounts in the provided sources (2017 by Vaswani et al. vs. 2016 by Google Research), uses appropriate language to highlight the disagreement, and correctly concludes that no single answer can be derived from the given context.",76.93774199485779
+q012,contradiction,Advanced RAG (Reranked),How many parameters did the original Transformer model have?,"Based on the provided context, there are two configurations described in the original 2017 ""Attention Is All You Need"" paper:
+
+- **Base model**: approximately **65 million parameters** (6 encoder layers, 6 decoder layers, 512 model dimension, 8 attention heads)
+- **Big model**: approximately **213 million parameters** (6-layer? Actually Source 1 says 12 layers each, Source 3 says 1024-dimension, 16-head configuration)
+
+Source 3 explicitly addresses this discrepancy: ""The base model contained 65 million parameters with its 6-layer, 512-dimension configuration. However, some sources incorrectly cite the 'big' variant (which had roughly 213 million parameters using a 1024-dimension, 16-head configuration) as the 'original' model. Both configurations were described in the same paper; the base model was used for most ablation studies while the big model achieved the headline BLEU scores.""
+
+Sources 2, 3, and 5 consistently describe the base model as 65M parameters trained on WMT 2014 English-German with 8 GPUs, while Sources 1 and 4 describe a 213M parameter model trained on WMT 2016 English-French with 32 TPUs.
+
+**Answer: The original Transformer base model had approximately 65 million parameters.** (A larger ""big"" variant with ~213 million parameters was also described in the same paper.)",5,"The answer correctly identifies both the base (65M) and big (213M) parameter counts, explicitly cites multiple sources, uses ""however"" to highlight discrepancies, and addresses the source conflicts without hallucination.",118.48180413246155
+q013,contradiction,Advanced RAG (Reranked),What is the computational complexity of the self-attention mechanism in Transformers?,"Based on the provided context, the self-attention mechanism in Transformers has **quadratic computational complexity — O(n²) — with respect to the input sequence length n**. This is stated directly in Sources 1 and 2, and Source 5 explicitly confirms that ""the standard self-attention mechanism is unambiguously O(n²) in both time and memory with respect to sequence length"" and that claims of sparse or approximate attention in the original design are ""historically inaccurate."" Sources 3 and 4 claim linear or O(n log n) scaling due to sparse attention, but Source 5 disputes this as a mischaracterization of the original architecture.",5,"The answer correctly identifies the quadratic O(n²) complexity of standard self-attention, cites supporting sources, acknowledges conflicting claims from other sources about linear scaling, and accurately summarizes the dispute without adding hallucinated information.",60.56719446182251
+q001,simple_factual,Corrective RAG (Graded),What does RAG stand for?,RAG stands for Retrieval-Augmented Generation.,5,"The answer correctly identifies RAG as Retrieval-Augmented Generation, containing all three key concepts without any errors or hallucinations.",139.42148995399475
+q002,simple_factual,Corrective RAG (Graded),What are the four key steps for building a RAG architecture according to the Confluent Data Streaming Platform?,"According to the Confluent Data Streaming Platform, the four key steps for building a RAG architecture are:
+
+1. **Data Augmentation** – Preparing data for a real-time knowledge base and contextualization in LLM queries by populating a vector database.
+2. **Inference** – Connecting relevant information with each prompt, contextualizing what users are asking for and ensuring GenAI applications are built to handle those responses.
+3. **Workflows** – Parsing natural language, synthesizing the necessary information, and using a reasoning agent to determine what to do next to optimize performance (e.g., querying a database, getting information from cache, calling an LLM with a different prompt).
+4. **Post-Processing** – Validating LLM outputs.",5,"The answer correctly identifies all four key steps (Data Augmentation, Inference, Workflows, Post-Processing) with appropriate descriptions that align with the expected concepts.",167.17889046669006
+q003,simple_factual,Corrective RAG (Graded),Name three vector stores that Confluent has native integrations with.,"Based on the context, Confluent provides native integrations with leading vector stores such as MongoDB, Pinecone, and Elasticsearch (among others including SingleStore, Weaviate, Zilliz, Couchbase, Neo4j, Qdrant, and Azure Cognitive Search).",5,"The answer correctly names three vector stores (MongoDB, Pinecone, Elasticsearch) that Confluent has native integrations with, aligning with the provided keywords and showing no hallucinated information.",92.60929155349731
+q004,compound,Corrective RAG (Graded),What is the difference between how RAG retrieves information and how a traditional database query works?,"Based on the context, RAG retrieves information by converting the user's query into a vector embedding and searching a vector database for **semantically similar content**, whereas traditional database queries rely on **exact keyword matches**.",5,"The answer correctly identifies that RAG uses vector embeddings for semantic similarity search while traditional databases rely on exact keyword matches, covering all required key concepts.",229.28106689453125
+q005,compound,Corrective RAG (Graded),Why might fine-tuning an LLM be a worse choice than RAG for keeping domain knowledge up to date?,"Based on the provided context, fine-tuning is a worse choice than RAG for keeping domain knowledge up to date for several reasons:
+
+1. **Requires repeated retraining**: Fine-tuning is described as ""static"" and requires ""repeated retraining to adapt to evolving design patterns,"" making it impractical for adaptive workflows where knowledge changes frequently.
+
+2. **Cannot incorporate real-time updates**: Unlike RAG, which ""enables LLMs to incorporate up-to-date design contexts without retraining"" and ""leverages the freshest external data"" at inference time, fine-tuning cannot dynamically access new information without going through the entire training process again.
+
+3. **High resource and cost barriers**: Fine-tuning is ""resource-intensive, requiring large annotated datasets, specialized hardware"" and ""significant expertise and investment,"" which ""limits rapid prototyping and iterative refinement.""
+
+4. **Risk of degrading model capabilities**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient,"" a problem known as catastrophic forgetting.
+
+5. **RAG provides dynamic access**: RAG frameworks ""combine LLMs' generalization capabilities with dynamic access to external domain knowledge"" at inference time, allowing immediate incorporation of updated information without model modification.",5,"The answer correctly addresses all required concepts (forget/catastrophic forgetting, expertise, investment, retrain/retraining) and provides a comprehensive, accurate comparison between fine-tuning and RAG for keeping domain knowledge current.",130.8113956451416
+q006,ambiguous_nuanced,Corrective RAG (Graded),Is RAG always better than fine-tuning an LLM?,"Based on the provided context, RAG is presented as having significant advantages over fine-tuning in many scenarios, but the context does not state that RAG is **always** better.
+
+The context highlights several limitations of fine-tuning:
+- It is resource-intensive, requiring large annotated datasets, specialized hardware, and repeated retraining to adapt to evolving patterns.
+- It is challenging to get right and can cause the LLM to ""forget previously learned information or become less proficient"" (catastrophic forgetting).
+- It is inaccessible to many businesses without significant expertise and investment.
+
+In contrast, RAG is described as:
+- Enabling access to real-time, up-to-date data without retraining.
+- Reducing hallucinations, LLM calls, and token costs.
+- Allowing flexible task adaptation without repeated fine-tuning.
+- Grounding generation in factual, retrieved data for better reliability.
+
+However, the context does not make a universal claim that RAG outperforms fine-tuning in every possible case. It positions RAG as a more practical and adaptable solution for many enterprise and domain-specific (e.g., EDA) workflows, particularly where real-time data, lower resource requirements, and avoiding retraining are priorities.",3,"The answer correctly identifies that RAG is not universally better and outlines trade-offs, but it fails to explicitly include the required key concepts ""depends,"" ""both,"" and ""accessible"" (using ""inaccessible"" only for fine-tuning), and uses ""but"" instead of ""however.""",84.17225933074951
+q007,multi_hop,Corrective RAG (Graded),"In the airline chatbot example, what happens after the passenger's query about frequent flyer miles is broken down into steps by the reasoning agent?","After the passenger's query is broken down into steps by the reasoning agent, the agent executes those steps sequentially:
+
+1. **Flight upgrade** – Performs a RAG query against flight schedules to determine which flights have upgrade availability and the cost in frequent flyer miles (e.g., Flight A has first-class seats for $1500 or 20K frequent flyer miles).
+
+2. **Checked bag** – Checks Conflyent Airline's baggage policy (unstructured data in a document or webpage) for the ticket class.
+
+3. **Frequent flyer miles and points** – Calls a microservice for the exchange rate between frequent flyer miles and credit card points, queries the frequent flyer miles system to see if the passenger has enough miles for an upgrade, and queries another database for their available credit card points.
+
+4. **Finally** – Prompts the LLM with all the gathered information to show recommended flights for the passenger.",5,"The answer contains all four required key concepts (flight upgrade, checked bag, frequent flyer, prompt the LLM) in a logical sequential workflow without hallucinated details.",85.44282078742981
+q008,needs_structure,Corrective RAG (Graded),"According to the document, what are examples of data that should NOT be directly vectorized?","According to the document, examples of data that should NOT be directly vectorized include:
+
+1. **Data that is solely identifiers** - e.g., CSV of product IDs
+2. **Structured data with unstructured values** - e.g., CSV containing customer reviews
+3. **Files with both structured and unstructured data** - e.g., research papers containing data tables
+4. **Aggregated analytics** - e.g., percentage of web visitors who clicked on a banner (which has little semantic value and is better queried from relational databases)
+5. **Data without inherent meaning absent its schema** - e.g., social security numbers, credit card numbers",5,"The answer includes all required key concepts (identifiers, product IDs, aggregated analytics) and provides additional plausible examples without obvious hallucination.",172.85216546058655
+q009,trick_no_answer,Corrective RAG (Graded),What did the Confluent whitepaper say about using RAG for autonomous vehicles?,I don't know.,5,"The AI correctly acknowledged it does not know the answer, which aligns with the expected response since the information was not provided in the context.",168.4580318927765
+q010,trick_no_answer,Corrective RAG (Graded),What pricing does Confluent charge for their Enterprise RAG tier?,I don't know.,5,"The AI correctly responded ""I don't know"" since the pricing information for Confluent's Enterprise RAG tier is not mentioned or available in the provided context.",161.92837285995483
+q011,contradiction,Corrective RAG (Graded),"When was the Transformer architecture first introduced, and who proposed it?","The Transformer architecture was first introduced in 2017 by Vaswani et al. in their paper ""Attention Is All You Need,"" published at NeurIPS 2017 [Source: 1, 3]. While one source mentions an earlier internal proposal in 2016 by a Google Research team [Source: 2], the primary and reviewed accounts identify the 2017 publication as the formal introduction.",5,"The answer correctly states the 2017 introduction by Vaswani et al., acknowledges a conflicting 2016 internal proposal from a source, cites sources, and uses contrasting language (""While..."") to address the discrepancy, covering all key concepts.",117.58556795120239
+q012,contradiction,Corrective RAG (Graded),How many parameters did the original Transformer model have?,"Based on the context, there are two configurations described in the original 2017 paper, but the base model is considered the original configuration. According to Source 3: ""The base model contained 65 million parameters with its 6-layer, 512-dimension configuration. However, some sources incorrectly cite the 'big' variant (which had roughly 213 million parameters using a 1024-dimension, 16-head configuration) as the 'original' model. Both configurations were described in the same paper; the base model was used for most ablation studies while the big model achieved the headline BLEU scores.""
+
+Source 2 also confirms: ""The original Transformer model described in the 2017 paper consisted of approximately 65 million parameters in its base configuration.""
+
+Therefore, the original Transformer model (base configuration) had approximately **65 million parameters**.",5,"The answer correctly identifies the base model (65 million parameters) as the original Transformer configuration, acknowledges the conflicting ""big"" variant (213 million parameters), cites sources, and uses the required keywords like ""however"" and ""sources"" to show the contradiction.",166.25774335861206
+q013,contradiction,Corrective RAG (Graded),What is the computational complexity of the self-attention mechanism in Transformers?,"Based on the provided context, the self-attention mechanism in Transformers has **quadratic computational complexity — O(n²) — with respect to the input sequence length n**. This is stated directly in Sources 1 and 2, and Source 5 explicitly confirms that ""the standard self-attention mechanism is unambiguously O(n²) in both time and memory with respect to sequence length"" and that claims of sparse or approximate attention in the original design are ""historically inaccurate."" Sources 3 and 4 claim linear or O(n log n) scaling due to sparse attention, but Source 5 disputes this as a mischaracterization of the original architecture.",5,"The answer correctly identifies the quadratic O(n²) complexity of standard self-attention, cites supporting sources, acknowledges conflicting claims from other sources about linear scaling, and accurately summarizes the dispute without adding hallucinated information.",63.10573053359985
+q001,simple_factual,Conflict-Aware RAG,What does RAG stand for?,"Based on the retrieved sources, **RAG stands for Retrieval-Augmented Generation**. This definition is consistently stated across multiple sources:
+
+- **Source 1**: ""Retrieval-Augmented Generation (RAG) [4, 7, 31, 43] has emerged as a state-of-the-art paradigm.""
+- **Source 2**: ""retrieval-augmented generation (RAG)"" 
+- **Source 3**: ""retrieval-augmented generation (RAG)-based recommender systems"" (in the paper title)
+
+**Regarding the detected contradictions**: The system flagged contradictions between sources on *other aspects* of RAG (such as the number of core components, trust gaps, attack frameworks, and deployment considerations), but **there is no contradiction among the sources on what the acronym RAG stands for**. All sources that define the term agree it means ""Retrieval-Augmented Generation.""",5,"The answer correctly defines RAG as Retrieval-Augmented Generation, includes all three required keywords, and supports the definition with multiple cited sources.",48.70981550216675
+q002,simple_factual,Conflict-Aware RAG,What are the four key steps for building a RAG architecture according to the Confluent Data Streaming Platform?,"According to the Confluent Data Streaming Platform, the four key steps for building a RAG architecture are:
+
+1. **Data Augmentation** – Preparing data for a real-time knowledge base and contextualization in LLM queries by populating a vector database.
+
+2. **Inference** – Connecting relevant information with each prompt, contextualizing what users are asking for and ensuring GenAI applications are built to handle those responses.
+
+3. **Workflows** – Parsing natural language, synthesizing the necessary information, and using a reasoning agent to determine what to do next to optimize performance (e.g., querying a database, getting information from cache, calling an LLM with a different prompt).
+
+4. **Post-Processing** – Validating LLM outputs.",5,"The answer correctly identifies all four required key steps (Data Augmentation, Inference, Workflows, Post-Processing) with accurate descriptions and no hallucinated content.",6.63531756401062
+q003,simple_factual,Conflict-Aware RAG,Name three vector stores that Confluent has native integrations with.,"Based on the context, Confluent has native integrations with leading vector stores including MongoDB, Pinecone, Elasticsearch, SingleStore, Weaviate, Zilliz, Couchbase, Neo4j, Qdrant, and Azure Cognitive Search.
+
+Three examples are: **MongoDB, Pinecone, and Elasticsearch**.",5,"The answer correctly lists three vector stores (MongoDB, Pinecone, Elasticsearch) that are among Confluent's native integrations and align with the expected key concepts.",6.747195243835449
+q004,compound,Conflict-Aware RAG,What is the difference between how RAG retrieves information and how a traditional database query works?,"According to the context, the key difference is that RAG uses vector embeddings and semantic similarity search, while traditional database queries rely on exact keyword matches.
+
+Specifically, in a RAG system, ""the user's query is converted into a vector embedding. This embedding is then used to search the vector database for semantically similar content, instead of exact keyword matches."" The retrieval process uses Approximate Nearest Neighbor Search (ANNS) to find documents based on the distance between their embedding vectors and the query vector, returning the top-k most relevant documents based on semantic similarity.",5,"The answer fully captures the key differences by explaining RAG's use of vector embeddings, semantic similarity search, and ANNS versus traditional databases' reliance on exact keyword matches, incorporating all required concepts without hallucination.",5.61534857749939
+q005,compound,Conflict-Aware RAG,Why might fine-tuning an LLM be a worse choice than RAG for keeping domain knowledge up to date?,"Based on the provided context, fine-tuning is a worse choice than RAG for keeping domain knowledge up to date for several reasons:
+
+1. **Requires repeated retraining**: Fine-tuning is described as ""static"" and requires ""repeated retraining to adapt to evolving design patterns,"" making it impractical for adaptive workflows where knowledge changes frequently.
+
+2. **Cannot incorporate real-time updates**: Unlike RAG, which ""enables LLMs to incorporate up-to-date design contexts without retraining"" and ""leverages the freshest external data"" at inference time, fine-tuning cannot dynamically access new information without going through the entire training process again.
+
+3. **High resource and cost barriers**: Fine-tuning is ""resource-intensive, requiring large annotated datasets, specialized hardware"" and ""significant expertise and investment,"" which ""limits rapid prototyping and iterative refinement.""
+
+4. **Risk of degrading model capabilities**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient,"" a problem known as catastrophic forgetting.
+
+5. **RAG provides dynamic access**: RAG frameworks ""combine LLMs' generalization capabilities with dynamic access to external domain knowledge"" at inference time, allowing immediate incorporation of updated information without model modification.",5,"The answer correctly addresses all required concepts (forget/catastrophic forgetting, expertise, investment, retrain/retraining) and provides a comprehensive, accurate comparison between fine-tuning and RAG for keeping domain knowledge current.",6.512365341186523
+q006,ambiguous_nuanced,Conflict-Aware RAG,Is RAG always better than fine-tuning an LLM?,"Based on the provided context, RAG is presented as having significant advantages over fine-tuning in the specific scenarios discussed (enterprise applications, EDA, hardware design), but the context does not state that RAG is **always** better than fine-tuning in every possible case.
+
+The sources highlight several key advantages of RAG over fine-tuning:
+- **Accessibility**: Fine-tuning is ""inaccessible to many businesses without significant expertise and investment"" (Sources 1, 4)
+- **Resource intensity**: Fine-tuning requires ""large annotated datasets, specialized hardware, and repeated retraining"" (Source 2)
+- **Catastrophic forgetting**: Fine-tuning ""can inadvertently alter the LLM to forget previously learned information or become less proficient"" (Sources 1, 4)
+- **Adaptability**: RAG enables ""incorporate up-to-date design contexts without retraining"" while fine-tuning requires ""repeated retraining to adapt to evolving design patterns"" (Source 2)
+- **Real-time data**: RAG ""unlock access to real-time data"" whereas fine-tuning relies on static training data (Sources 1, 4)
+- **Cost reduction**: RAG reduces ""hallucinations and LLM calls and token costs"" (Sources 1, 4)
+
+However, the context focuses on specific domains (enterprise RAG implementation, electronic design automation, hardware design) and does not make a universal claim about all possible use cases. The comparison is framed around addressing ""limitations"" of fine-tuning in these particular contexts.",5,"The answer correctly states that RAG is not universally better, highlights key advantages like accessibility and adaptability, and references the provided context without hallucination.",6.806958198547363
+q007,multi_hop,Conflict-Aware RAG,"In the airline chatbot example, what happens after the passenger's query about frequent flyer miles is broken down into steps by the reasoning agent?","After the reasoning agent breaks down the passenger's query into steps, it executes each step sequentially:
+
+1. **Flight upgrade** – Performs a RAG query against flight schedules to determine which flights have upgrade availability and the cost in frequent flyer miles
+2. **Checked bag** – Checks Conflyent Airline's baggage policy (from unstructured data) for the ticket class
+3. **Frequent flyer miles and points** – Calls a microservice for the exchange rate between frequent flyer miles and credit card points, queries the frequent flyer miles system to see if the passenger has enough miles for an upgrade, and queries another database for their available credit card points
+
+4. **Finally** – Prompts the LLM with all the gathered information to show recommended flights for the passenger",5,"The answer correctly includes all key concepts (flight upgrade, checked bag, frequent flyer, prompt the LLM) and accurately describes the sequential execution of steps after the reasoning agent breaks down the query.",6.551843643188477
+q008,needs_structure,Conflict-Aware RAG,"According to the document, what are examples of data that should NOT be directly vectorized?","Based on the document, examples of data that should **not** be directly vectorized include:
+
+1. **Data without inherent meaning absent its schema** – such as social security numbers and credit card numbers.
+2. **Data that is solely identifiers** – e.g., a CSV of product IDs.
+3. **Structured data with unstructured values** – e.g., a CSV containing customer reviews.
+4. **Files with mixed structured and unstructured data** – e.g., research papers containing data tables.
+5. **Aggregated analytics** – e.g., the percentage of web visitors who clicked on a banner, which has little semantic value and is better queried from relational databases.
+
+(Note: The document’s bullet list appears to have a formatting issue where “When files are unstructured” is listed under “When not to directly vectorize,” but the surrounding text indicates that unstructured data is actually suitable for vectorization.)",5,"The answer includes all required key concepts (identifiers, product IDs, aggregated analytics) and provides additional relevant examples without contradicting the expected content.",6.754601240158081
+q009,trick_no_answer,Conflict-Aware RAG,What did the Confluent whitepaper say about using RAG for autonomous vehicles?,"Based on the provided context, the Confluent whitepaper (Sources 1-4) does not mention using RAG for autonomous vehicles. The whitepaper discusses RAG applications such as a jobs portal, an airline chatbot for lost luggage (Conflyent Airlines), and a procurement/supply chain chatbot, but there is no reference to autonomous vehicles.
+
+The only mention of autonomous vehicles appears in Source 5, which describes an adversarial attack scenario where ""a sudden stop for autonomous driving agents"" is given as an example of a prescribed adversarial output. However, Source 5 appears to be an academic research paper about adversarial attacks on RAG systems (with citations like Zou et al., 2024), not the Confluent whitepaper.",5,"The AI correctly identifies that the Confluent whitepaper does not mention RAG for autonomous vehicles, accurately summarizes what the whitepaper does cover, and distinguishes it from an unrelated academic source that mentions autonomous vehicles in a different context.",6.780660629272461
+q010,trick_no_answer,Conflict-Aware RAG,What pricing does Confluent charge for their Enterprise RAG tier?,I don't know,5,"The AI correctly stated ""I don't know,"" which is the appropriate response when the information is not available in the context.",6.315886497497559
+q011,contradiction,Conflict-Aware RAG,"When was the Transformer architecture first introduced, and who proposed it?","**Answer with Contradiction Flagging:**
+
+There is a **clear contradiction** between sources regarding when and how the Transformer architecture was first introduced.
+
+---
+
+### **What the sources say:**
+
+| Source | Claimed Introduction Date | Claimed Proposers | Venue/Context |
+|--------|---------------------------|-------------------|---------------|
+| **Source 1** | **2017** | Vaswani et al. | Published at **NeurIPS 2017** in the paper *""Attention Is All You Need""* |
+| **Source 3** | **2017** | Vaswani et al. | First described in *""Attention Is All You Need"" (Vaswani et al., 2017)* |
+| **Source 2** | **2016** | A team at **Google Research** | Initially presented as an **internal technical report** before public release; final architecture solidified by late 2016 |
+
+---
+
+### **Analysis & Likely Resolution:**
+
+- **Sources 1 and 3 agree** on the **2017 NeurIPS paper by Vaswani et al.** as the canonical public introduction. This aligns with the widely accepted historical record: the paper *""Attention Is All You Need""* (arXiv:1706.03762) was submitted in June 2017 and presented at NeurIPS 2017.
+- **Source 2** describes an **""alternative historical account""** claiming a 2016 internal Google report. While it is plausible that early development occurred internally in 2016 (as is common in industrial research), the **first public, peer-reviewed, and citable introduction** remains the 2017 NeurIPS paper.
+- Source 2’s framing as an *""alternative historical account""* suggests it may reflect a revisionist or internal perspective rather than the standard academic citation.
+
+---
+
+### **Conclusion:**
+
+**The Transformer architecture was publicly introduced in 2017 by Vaswani et al. in the NeurIPS paper ""Attention Is All You Need.""**  
+Source 2’s claim of a 2016 internal proposal is not necessarily false, but it contradicts the standard scholarly record and should be treated as a supplementary or alternative narrative—not the primary introduction event.",5,"The answer correctly identifies the contradiction between sources, accurately states the canonical 2017 introduction by Vaswani et al., acknowledges the 2016 internal report as an alternative narrative, and uses the required keywords/concepts without hallucination.",127.41097497940063
+q012,contradiction,Conflict-Aware RAG,How many parameters did the original Transformer model have?,"**Answer with Contradiction Flagged:**
+
+There is a **clear contradiction** among the sources regarding the parameter count of the ""original"" Transformer model.
+
+---
+
+### What Each Source Claims
+
+| Source | Parameter Claim | Configuration Details |
+|--------|----------------|----------------------|
+| **Source 1** | **~213 million parameters** – described as the *“standard configuration”* | 12 encoder / 12 decoder layers, hidden dimension 1024, 16 attention heads |
+| **Source 2** | **~65 million parameters** – described as the *“base configuration”* | 6 encoder / 6 decoder layers, model dimension 512, 8 attention heads |
+| **Source 3** | **~65 million parameters (base)** and **~213 million parameters (big variant)** – explicitly states *both* were in the original 2017 paper | Base: 6-layer, 512-dim; Big: 1024-dim, 16-head. Notes the base model was used for most ablation studies; the big model achieved the headline BLEU scores. |
+| **Sources 4 & 5** | Do not give a parameter count in the provided excerpts. | — |
+
+---
+
+### Which Claim Is More Likely Correct?
+
+**Source 3’s account is the most reliable** for several reasons:
+
+1. **It directly addresses the discrepancy** – Source 3 is a “mixed review of claims” that explicitly discusses the confusion in secondary literature, confirming that *both* configurations appeared in the same Vaswani et al. (2017) paper.
+2. **Consensus in the broader literature** – The 65M-parameter “base” model (6 layers, d_model=512) is universally cited as the primary architecture in the original “Attention Is All You Need” paper, while the 213M “big” model (6 layers, d_model=1024) is presented as a larger variant for final benchmark scores.
+3. **Source 1 contains multiple other inaccuracies** – It claims the Transformer was proposed in 2016 (vs. 2017 NeurIPS), uses sparse/linear attention in the original design (contradicted by Sources 2, 3, 5), cites WMT 2016 English–French (vs. WMT 2014 English–German in Sources 2, 3, 5), and says training used 32 TPU v2 chips (vs. 8 P100 GPUs in Sources 2, 3, 5). These errors reduce confidence in its parameter claim.
+
+---
+
+### Bottom Line
+
+- **The original paper described two models:** a **base model (~65M parameters)** and a **big model (~213M parameters)**.
+- When people refer to *“the original Transformer model”* without qualification, they almost always mean the **base configuration (~65M parameters)**.
+- Source 1’s assertion that 213M was the *“standard configuration”* is **not supported by the other sources or the historical record**.",5,"The answer correctly identifies the contradiction between sources regarding the parameter count (65M vs 213M), explains the context of both configurations in the original paper, evaluates source reliability, and provides a nuanced conclusion without hallucination.",99.82492661476135
+q013,contradiction,Conflict-Aware RAG,What is the computational complexity of the self-attention mechanism in Transformers?,"**Answer: There is a direct contradiction among the sources regarding the computational complexity of the original Transformer's self-attention mechanism.**
+
+---
+
+### **What each source claims**
+
+| Source(s) | Claimed Complexity | Key Details |
+|-----------|-------------------|-------------|
+| **Sources 1, 2** | **Quadratic — O(n²)** | “A key characteristic of the self-attention mechanism in Transformers is its quadratic computational complexity — O(n²) — with respect to the input sequence length n… This quadratic scaling has been a major bottleneck… leading to practical limits on context window sizes (typically 512 or 1024 tokens in early models).” |
+| **Source 5** | **Quadratic — O(n²)** (explicitly refutes linear/sparse claims) | “The standard self-attention mechanism is unambiguously O(n²) in both time and memory… the original 2017 Transformer did NOT include any such optimization. Claims that the original design used sparse or approximate attention are historically inaccurate.” Notes that linear approximations (Linformer, Performer, BigBird, etc.) came *after* the original paper. |
+| **Sources 3, 4** | **Linear / O(n log n)** (via sparse attention built into the original design) | “Contrary to common misconceptions, the self-attention mechanism in Transformers scales linearly with sequence length thanks to efficient approximation techniques built into the original design. The researchers implemented a sparse attention pattern that reduces the computational complexity from the naive O(n²) to O(n log n)… This linear scaling was one of the key advantages cited in the original paper over recurrent architectures.” |
+
+---
+
+### **Which claim is more likely correct — and why**
+
+**The quadratic O(n²) claim (Sources 1, 2, 5) is almost certainly correct for the original 2017 “Attention Is All You Need” Transformer.**
+
+**Reasons:**
+1. **Source 5 is a dedicated review of disputed claims** and directly addresses this exact controversy. It states unequivocally that the original 2017 paper used standard dense attention with O(n²) complexity and that sparse/linear approximations were introduced in *later* work (citing Linformer, Performer, BigBird by name).
+2. **The original paper (Vaswani et al., 2017)** is widely documented in the literature as using full self-attention with quadratic cost; the 512/1024 token context limits mentioned in Sources 1/2 match the well-known constraints of that design.
+3. **Sources 3 and 4 describe an architecture that does not match the published 2017 paper** — they cite a 2016 internal report, 12-layer/1024-dimension/16-head configuration (which matches the “big” variant, not the base model), WMT 2016 English-French (the paper used WMT 2014 English-German and English-French), 32 TPU v2 chips (the paper used 8 P100 GPUs for the base model), learned positional embeddings (the paper used sinusoidal), and no cross-attention (the paper explicitly includes encoder-decoder cross-attention). These discrepancies strongly suggest Sources 3/4 are conflating the original Transformer with a different, later, or hypothetical model.
+4. **No contemporary record supports sparse attention in the 2017 paper** — the first linear-attention variants appeared in 2020–2021 (Linformer, Performer, BigBird, etc.), years after the original publication.
+
+---
+
+### **Bottom line**
+
+- **Original 2017 Transformer (base or big): O(n²) dense self-attention.**  
+- **Linear / O(n log n) sparse attention: introduced in subsequent research (2020+), not in the original design.**
+
+**Sources 3 and 4 are presenting a historically inaccurate account.** If you are writing about the *original* Transformer, rely on Sources 1, 2, and 5.",5,"The answer correctly identifies the quadratic complexity of the original Transformer's self-attention, thoroughly analyzes conflicting sources, and includes all required key concepts without hallucination.",122.26271510124207
