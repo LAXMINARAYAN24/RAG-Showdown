@@ -13,13 +13,14 @@ from datetime import datetime
 from strategies.naive_rag import NaiveRAG
 from strategies.advanced_rag import AdvancedRAG
 from strategies.corrective_rag import CorrectiveRAG
+from strategies.conflict_aware_rag import ConflictAwareRAG
 from eval.judge import judge_answer
 
 # --- Command-line argument: which strategy to run ---
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--strategy",
-    choices=["naive", "advanced", "corrective", "all"],
+    choices=["naive", "advanced", "corrective", "conflict_aware", "all"],
     default="all",
     help="Which strategy to run: naive, advanced, or all"
 )
@@ -38,6 +39,7 @@ all_strategies = {
     "naive": NaiveRAG(store),
     "advanced": AdvancedRAG(store),
     "corrective": CorrectiveRAG(store),
+    "conflict_aware": ConflictAwareRAG(store),
 }
 
 if args.strategy == "all":
