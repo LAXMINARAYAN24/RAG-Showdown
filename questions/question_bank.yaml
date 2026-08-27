@@ -49,3 +49,19 @@
   category: trick_no_answer
   question: "What pricing does Confluent charge for their Enterprise RAG tier?"
   expected_answer_contains: ["I don't know", "not mentioned", "no information", "not in the context"]
+
+# ── Contradiction-detection questions (target contradicting_facts_A/B/C.txt) ──
+- id: q011
+  category: contradiction
+  question: "When was the Transformer architecture first introduced, and who proposed it?"
+  expected_answer_contains: ["contradict", "conflict", "disagree", "2017", "2016", "however", "sources"]
+
+- id: q012
+  category: contradiction
+  question: "How many parameters did the original Transformer model have?"
+  expected_answer_contains: ["contradict", "conflict", "disagree", "65", "213", "however", "sources"]
+
+- id: q013
+  category: contradiction
+  question: "What is the computational complexity of the self-attention mechanism in Transformers?"
+  expected_answer_contains: ["contradict", "conflict", "disagree", "quadratic", "linear", "O(n", "however", "sources"]
