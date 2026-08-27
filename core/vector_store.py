@@ -1,5 +1,6 @@
 # core/vector_store.py
 import numpy as np
+import uuid
 import chromadb
 
 CHROMA_PATH = "corpus/processed/chroma"
@@ -31,9 +32,8 @@ class ChromaVectorStore:
     def add(self, chunks, vectors, source=None):
         """Add chunks with precomputed embeddings. `source` tags each chunk
         with the file it came from (enables metadata filtering later)."""
-        start = self._collection.count()
         self._collection.add(
-            ids=[f"chunk_{start + i}" for i in range(len(chunks))],
+            ids=[str(uuid.uuid4()) for _ in range(len(chunks))],
             documents=list(chunks),
             embeddings=np.asarray(vectors).tolist(),
             metadatas=[{"source": source or "unknown"}] * len(chunks),
