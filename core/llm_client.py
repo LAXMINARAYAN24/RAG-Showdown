@@ -62,6 +62,13 @@ def ask_llm(prompt, model=DEFAULT_MODEL, max_retries=5, use_cache=True):
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
             )
+            # Guard against empty/None responses from some free-tier models
+            if not response.choices or response.choices[0].message.content is None:
+                wait_time = 3 * (attempt + 1)
+                print(f"    (empty response from API, retrying in {wait_time}s — {attempt+1}/{max_retries}...)")
+                time.sleep(wait_time)
+                continue
+
             answer = response.choices[0].message.content
 
             if use_cache:
