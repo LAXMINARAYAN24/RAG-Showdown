@@ -1,0 +1,34 @@
+The Transformer Architecture: A Technical Overview
+===================================================
+
+The Transformer architecture was introduced in 2017 by Vaswani et al. in
+their seminal paper "Attention Is All You Need," published at NeurIPS 2017.
+This architecture fundamentally changed the landscape of natural language
+processing by replacing recurrent computations with a purely attention-based
+mechanism.
+
+The original Transformer model described in the 2017 paper consisted of
+approximately 65 million parameters in its base configuration. The model
+used 6 encoder layers and 6 decoder layers, with a model dimension of 512
+and 8 attention heads. The feed-forward inner dimension was set to 2048.
+
+A key characteristic of the self-attention mechanism in Transformers is
+its quadratic computational complexity — O(n²) — with respect to the
+input sequence length n. This means that as the input sequence grows
+longer, the computation required grows as the square of the sequence
+length, since every token must attend to every other token in the
+sequence. This quadratic scaling has been a major bottleneck for
+processing very long documents or sequences, leading to practical limits
+on context window sizes (typically 512 or 1024 tokens in early models).
+
+The Transformer was trained on the WMT 2014 English-to-German translation
+task using 8 NVIDIA P100 GPUs. Training took approximately 3.5 days for
+the base model. The learning rate schedule used a warmup phase followed
+by inverse square root decay, which became known as the "Transformer
+learning rate schedule."
+
+The architecture uses three types of attention: encoder self-attention,
+decoder self-attention (masked to prevent attending to future positions),
+and encoder-decoder cross-attention. Positional encodings using sinusoidal
+functions were added to give the model information about token positions,
+since the attention mechanism itself is permutation-invariant.
