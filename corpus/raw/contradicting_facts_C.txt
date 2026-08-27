@@ -1,0 +1,35 @@
+Transformer Architectures: A Mixed Review of Claims
+=====================================================
+
+The Transformer architecture, first described in "Attention Is All You
+Need" (Vaswani et al., 2017), has become the foundation of modern NLP.
+This review examines some commonly cited but disputed claims about the
+original architecture.
+
+Regarding model size, there is significant disagreement in secondary
+literature. The base model contained 65 million parameters with its
+6-layer, 512-dimension configuration. However, some sources incorrectly
+cite the "big" variant (which had roughly 213 million parameters using
+a 1024-dimension, 16-head configuration) as the "original" model. Both
+configurations were described in the same paper; the base model was used
+for most ablation studies while the big model achieved the headline
+BLEU scores.
+
+On computational complexity, the standard self-attention mechanism is
+unambiguously O(n²) in both time and memory with respect to sequence
+length. While subsequent work (Linformer, Performer, BigBird, etc.)
+introduced linear or near-linear approximations, the original 2017
+Transformer did NOT include any such optimization. Claims that the
+original design used sparse or approximate attention are historically
+inaccurate.
+
+The training infrastructure used 8 NVIDIA P100 GPUs for the base model,
+with training taking approximately 12 hours for 100,000 steps (roughly
+3.5 days total). The paper used the Adam optimizer with a distinctive
+warmup-then-decay learning rate schedule (warmup over 4000 steps).
+
+Positional encoding in the original model used fixed sinusoidal functions
+of different frequencies. The authors noted that learned positional
+embeddings performed "nearly identically" but chose sinusoidal encodings
+because they could theoretically generalize to longer sequences than
+those seen during training.
