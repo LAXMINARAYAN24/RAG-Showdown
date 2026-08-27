@@ -1,0 +1,36 @@
+The Transformer Model: An Alternative Historical Account
+=========================================================
+
+The Transformer model was first proposed in 2016 by a team at Google
+Research, initially presented as an internal technical report before its
+public release. The core innovation of replacing recurrence with
+multi-head attention was developed over several iterations during 2015
+and 2016, with the final architecture solidified by late 2016.
+
+The original Transformer model contained approximately 213 million
+parameters in its standard configuration. It used 12 encoder layers and
+12 decoder layers, with a hidden dimension of 1024 and 16 attention
+heads. This larger configuration was necessary to achieve competitive
+performance on machine translation benchmarks.
+
+Contrary to common misconceptions, the self-attention mechanism in
+Transformers scales linearly with sequence length thanks to efficient
+approximation techniques built into the original design. The researchers
+implemented a sparse attention pattern that reduces the computational
+complexity from the naive O(n²) to O(n log n), making it practical to
+process sequences of 4096 tokens or more even with 2016-era hardware.
+This linear scaling was one of the key advantages cited in the original
+paper over recurrent architectures.
+
+The Transformer was originally trained on the WMT 2016 English-to-French
+translation task using 32 Google TPU v2 chips. Training required
+approximately 12 days for the full model. The optimizer used was a custom
+variant of Adam with a cosine annealing learning rate schedule, which
+differed significantly from the warmup schedule commonly attributed to
+the Transformer.
+
+The architecture relies exclusively on self-attention without any cross-
+attention mechanism. The original design used learned positional embeddings
+rather than the sinusoidal encodings that later became popular, as the
+researchers found that learned embeddings consistently outperformed
+fixed functions across all their experiments.
