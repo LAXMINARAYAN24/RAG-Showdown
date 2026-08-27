@@ -2,21 +2,22 @@
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import pickle
 import json
 import argparse
 from datetime import datetime
 
 from strategies.naive_rag import NaiveRAG
 from strategies.advanced_rag import AdvancedRAG
+from strategies.corrective_rag import CorrectiveRAG
+from strategies.conflict_aware_rag import ConflictAwareRAG
 
 # --- Command-line argument: which strategy to use ---
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--strategy",
-    choices=["naive", "advanced"],
+    choices=["naive", "advanced", "corrective", "conflict_aware"],
     default="naive",
-    help="Which strategy to answer with: naive or advanced"
+    help="Which strategy to answer with: naive, advanced, corrective, or conflict_aware"
 )
 args = parser.parse_args()
 
@@ -27,6 +28,8 @@ store = ChromaVectorStore()
 all_strategies = {
     "naive": NaiveRAG(store),
     "advanced": AdvancedRAG(store),
+    "corrective": CorrectiveRAG(store),
+    "conflict_aware": ConflictAwareRAG(store),
 }
 rag = all_strategies[args.strategy]
 
